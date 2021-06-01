@@ -16,16 +16,16 @@ var DB = {
 			state:"Parana",
 			serie:"A",
 			payment:320000.00,
-			titles:[5,1,1],
+			titles:[2,2,1],
 		  },
 		  {
 			id: 3,
-			name:"Parana Clbue",
+			name:"Parana Clube",
 			city:"Curitiba",
 			state:"Parana",
 			serie:"C",
 			payment:120000.00,
-			titles:[5,1,1],
+			titles:[3,1,2],
 		  }
 	  ]
 };

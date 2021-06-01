@@ -1,13 +1,13 @@
 const { teams } = require("./teams");
 const express = required("express");
 const router = express.Router();
-const  DB = required("./teams");
+const DB = required("./teams");
 
 router.get("/teams", (req, res) => {
-    if(DB.characters === undefined){
-        res.status(404).json({ msg: "Sem personagens no momento."});
+    if(DB.teams === undefined){
+        res.status(404).json({ msg: "Sem times no momento."});
     }else {
-        res.status(200).json(DB.characters);
+        res.status(200).json(DB.teams);
     }
 });
 
@@ -16,48 +16,70 @@ router.get("/teams/:id", (req, res) => {
         res.sendStatus(404);
     }else {
         const id = parseInt(req.params.id);
-        const characters = DB.characters.find((c) => c.id === id);
-        if(characters !== undefined){
-            res.status(200).json(characters);
+        const teams = DB.teams.find((c) => c.id === id);
+        if(teams !== undefined){
+            res.status(200).json(teams);
         } else {
-            res.status(404).json({ msg: "Personagem não encontrado." });
+            res.status(404).json({ msg: `Time com o id '${req.params.id}'não encontrado.` });
         }
         
     }
 });
 
-router.post("/newTeam/", (req, res) => {
-    const {
-        name,
-        species,
-        house,
-        ancestry,
-        wand,
-        hogwartsStudent,
-        hogwartsStaff
-    } = req.body;
-
-    if(name && species && house !== undefined){
-        
-    }else {
-        res.status(404).json({msg: "Dados faltando. "});
-        
-    }
+routes.post("/newTeam", (req, res) => {
+	const {
+		name,
+		city,
+		state,
+		division,
+		titles,
+		payroll
+	} = req.body;
+	if (name && city && state && titles && payroll) {
+		const id = DB.teams.length + 1;
+		const divisionValue = division || '';
+		DB.teams.push({
+			id,
+			name,
+			city,
+			state,
+			divisionValue,
+			titles,
+			payroll
+		});
+		res.status(200).json({ msg: "Time adicionado." });
+	} else {
+		res.status(400).json({ msg: "Dados obrigatórios incompletos." });
+	}
 });
 
-router.put("/teams/:id", (req, res) => {
+router.put("/team/:id", (req, res) => {
     if(isNaN(req.params.id)){
         res.sendStatus(404);
     }else {
         const id = parseInt(req.params.id);
-        const characters = DB.characters.find((c) => c.id === id);
-        if(characters !== undefined) {
-            //adiciona
+        const teams = DB.teams.find((c) => c.id === id);
+        if(teams !== undefined) {
+           
         } else {
-            res.status(404).json({ msg: "Personagem não encontrado." });
+            res.status(404).json({ msg: `Time com o id '${req.params.id}'não encontrado.` });
         }
-        
     }
+});
+
+router.delete("/teams/:id", (req, res) => {
+	if (isNaN(req.params.id)) {
+		res.sendStatus(400);
+	} else {
+		const id = parseInt(req.params.id);
+		const index = DB.teams.findIndex((c) => c.id == id);
+		if (index == -1) {
+			res.status(404).json({ msg: "Time não existe." });
+		} else {
+			DB.teams.splice(index, 1);
+			res.status(200).json({ msg: "Time excluído." });
+		}
+	}
 });
 
 modelu.exports = router;
