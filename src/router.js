@@ -1,7 +1,7 @@
+const express = require("express");
 const { teams } = require("./teams");
-const express = required("express");
 const router = express.Router();
-const DB = required("./teams");
+const DB = require("./teams");
 
 router.get("/teams", (req, res) => {
     if(DB.teams === undefined){
@@ -103,4 +103,4 @@ router.delete("/teams/:id", (req, res) => {
 	}
 });
 
-modelu.exports = router;
+module.exports = router;
