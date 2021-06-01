@@ -5,8 +5,8 @@ var DB = {
 		  name:"Atletico",
 		  city:"Curitiba",
 		  state:"Parana",
-		  serie:"A",
-		  payment:520000.00,
+		  division:"A",
+		  payroll:520000.00,
 		  titles:[5,1,1],
 		},
 		{
@@ -14,8 +14,8 @@ var DB = {
 			name:"Coritiba",
 			city:"Curitiba",
 			state:"Parana",
-			serie:"A",
-			payment:320000.00,
+			division:"A",
+			payroll:320000.00,
 			titles:[2,2,1],
 		  },
 		  {
@@ -23,8 +23,8 @@ var DB = {
 			name:"Parana Clube",
 			city:"Curitiba",
 			state:"Parana",
-			serie:"C",
-			payment:120000.00,
+			division:"C",
+			payroll:120000.00,
 			titles:[3,1,2],
 		  }
 	  ]

@@ -32,7 +32,7 @@ routes.post("/newTeam", (req, res) => {
 	} = req.body;
 	if (name && city && state && titles && payroll) {
 		const id = DB.teams.length + 1;
-		const divisionValue = division || '';
+		const divisionValue = division ?? '';
 		DB.teams.push({
 			id,
 			name,
@@ -48,17 +48,17 @@ routes.post("/newTeam", (req, res) => {
 	}
 });
 
-routes.delete("/character/:id", (req, res) => {
+routes.delete("/team/:id", (req, res) => {
 	if (isNaN(req.params.id)) {
 		res.sendStatus(400);
 	} else {
 		const id = parseInt(req.params.id);
-		const index = DB.characters.findIndex((c) => c.id == id);
+		const index = DB.teams.findIndex((c) => c.id == id);
 		if (index == -1) {
-			res.status(404).json({ msg: "Personagem não existe." });
+			res.status(404).json({ msg: "Time não existe." });
 		} else {
 			DB.characters.splice(index, 1);
-			res.status(200).json({ msg: "Personagem excluído." });
+			res.status(200).json({ msg: "Time excluído." });
 		}
 	}
 });
