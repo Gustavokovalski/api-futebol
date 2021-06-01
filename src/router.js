@@ -1,9 +1,9 @@
-const { characters } = require("./teams");
+const { teams } = require("./teams");
 const express = required("express");
 const router = express.Router();
-const  DB = required("./characters");
+const  DB = required("./teams");
 
-router.get("/characters", (req, res) => {
+router.get("/teams", (req, res) => {
     if(DB.characters === undefined){
         res.status(404).json({ msg: "Sem personagens no momento."});
     }else {
@@ -11,7 +11,7 @@ router.get("/characters", (req, res) => {
     }
 });
 
-router.get("/characters/:id", (req, res) => {
+router.get("/teams/:id", (req, res) => {
     if(isNaN(req.params.id)){
         res.sendStatus(404);
     }else {
@@ -26,7 +26,7 @@ router.get("/characters/:id", (req, res) => {
     }
 });
 
-router.post("/newCharacters/", (req, res) => {
+router.post("/newTeam/", (req, res) => {
     const {
         name,
         species,
@@ -45,7 +45,7 @@ router.post("/newCharacters/", (req, res) => {
     }
 });
 
-router.put("/characters/:id", (req, res) => {
+router.put("/teams/:id", (req, res) => {
     if(isNaN(req.params.id)){
         res.sendStatus(404);
     }else {
