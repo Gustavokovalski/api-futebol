@@ -32,7 +32,7 @@ routes.post("/newTeam", (req, res) => {
 	} = req.body;
 	if (name && city && state && titles && payroll) {
 		const id = DB.teams.length + 1;
-		const divisionValue = division || '';
+		const divisionValue = division ?? '';
 		DB.teams.push({
 			id,
 			name,
