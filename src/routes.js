@@ -21,29 +21,28 @@ routes.get("/characters/:id", (req, res) => {
 	}
 });
 
-routes.post("/newCharacter", (req, res) => {
+routes.post("/newTeam", (req, res) => {
 	const {
 		name,
-		species,
-		house,
-		ancestry,
-		wand,
-		hogwartsStudent,
-		hogwartsStaff,
+		city,
+		state,
+		division,
+		titles,
+		payroll
 	} = req.body;
-	if (name && species && house != undefined) {
-		const id = DB.characters.length + 1;
-		DB.characters.push({
+	if (name && city && state && titles && payroll) {
+		const id = DB.teams.length + 1;
+		const divisionValue = division || '';
+		DB.teams.push({
 			id,
 			name,
-			species,
-			house,
-			ancestry,
-			wand,
-			hogwartsStudent,
-			hogwartsStaff,
+			city,
+			state,
+			divisionValue,
+			titles,
+			payroll
 		});
-		res.status(200).json({ msg: "Personagem adicionado." });
+		res.status(200).json({ msg: "Time adicionado." });
 	} else {
 		res.status(400).json({ msg: "Dados obrigatórios incompletos." });
 	}
