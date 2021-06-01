@@ -26,7 +26,7 @@ router.get("/teams/:id", (req, res) => {
     }
 });
 
-routes.post("/newTeam", (req, res) => {
+router.post("/newTeam", (req, res) => {
 	const {
 		name,
 		city,
@@ -60,7 +60,28 @@ router.put("/team/:id", (req, res) => {
         const id = parseInt(req.params.id);
         const teams = DB.teams.find((c) => c.id === id);
         if(teams !== undefined) {
-           
+            const {
+                name,
+                city,
+                state,
+                division,
+                titles,
+                payroll
+            } = req.body;
+            if (name && city && state && titles && payroll) {
+                const id = DB.teams.length + 1;
+                const divisionValue = division || '';
+                DB.teams.push({
+                    id,
+                    name,
+                    city,
+                    state,
+                    divisionValue,
+                    titles,
+                    payroll
+                });
+            }
+            res.status(200).json(teams);
         } else {
             res.status(404).json({ msg: `Time com o id '${req.params.id}'não encontrado.` });
         }
